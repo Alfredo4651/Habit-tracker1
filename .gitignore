@@ -1,0 +1,15 @@
+# Virtual environment
+venv/
+
+# Pytest cache and compiled files
+__pycache__/
+*_cache/
+
+# Local database file
+habit.db
+
+# Test session data (optional)
+session.json
+
+# PyCharm project settings
+.idea/
