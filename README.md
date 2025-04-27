@@ -21,34 +21,36 @@ Habit Tracker is a Python-based command-line interface (CLI) application that al
 ## Features
 
 ### User Management
-- Secure user authentication system.
-- Individual user profiles.
-- Predefined habit templates for new users.
+- **Secure user authentication system.**
+- **Individual user profiles.**
+- **Predefined habit templates for new users.**
 
 ### Habit Management
-- Create, edit, and delete habits.
-- Mark habits as complete.
-- Daily and weekly habit tracking.
-- Customizable habit descriptions.
-- Streak tracking system.
+- **Create, edit, and delete habits.**
+- **Mark habits as complete.**
+- **Daily and weekly habit tracking.**
+- **Customizable habit descriptions.**
+- **Streak tracking system.**
 
 ### Analytics
-- View currently tracked habits.
-- Filter habits by periodicity (daily, weekly).
-- Track longest running streaks.
-- Analyze habit completion patterns.
+- **View currently tracked habits.**
+- **Filter habits by periodicity (daily, weekly).**
+- **Track longest running streaks.**
+- **Analyze habit completion patterns.**
 
 ### Interface
-- User-friendly CLI.
-- Interactive menu system.
-- Clear command structure.
-- Real-time feedback.
+- **User-friendly CLI.**
+- **Interactive menu system.**
+- **Clear command structure.**
+- **Real-time feedback.**
 
 ## Technical Requirements
 
-- Python 3.7+
-- SQLite3
-- Virtual Environment
+- **Python 3.7+**
+- **SQLite3**
+- **pytest**
+- **Questionary**
+- **Virtual Environment**
 
 ## Installation
 
@@ -139,95 +141,16 @@ Sample data can be added via the `test_data_insertion.py` script to simulate hab
 
 ## Testing
 
-The project uses `pytest` for testing key functionality.
+The project uses `pytest` for testing key functionality, run  **test_concept.py** and  **test_analyze**.
 
-**Note**: Test should be run after running **python db.py** and python **test_data_insertion** in the terminal.
+**Note**: Test should be run after running **python db.py** and **python test_data_insertion.py** in the terminal.
 
 To run all tests:
 
 ```bash
 pytest
-```
 
-The following tests are included:
 
-```python
-import sys
-import os
-import pytest
-
-# Add the parent directory to sys.path so the analyze module can be found
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-from analyze import (
-    fetch_all_habits,
-    fetch_habits_by_periodicity,
-    fetch_all_streaks,
-    fetch_streak_for_habit,
-)
-
-# NOTE: Assumes you have some sample data in your habit_tracker.db
-
-def test_fetch_all_habits():
-    """
-    Test that fetch_all_habits returns a list of habit names (strings).
-    """
-    habits = fetch_all_habits()
-    assert isinstance(habits, list)
-    if habits:
-        assert all(isinstance(habit, str) for habit in habits)
-
-def test_fetch_habits_by_periodicity_daily():
-    """
-    Test that fetch_habits_by_periodicity correctly filters 'daily' habits.
-    """
-    daily_habits = fetch_habits_by_periodicity("daily")
-    assert isinstance(daily_habits, list)
-    if daily_habits:
-        assert all(isinstance(h, str) for h in daily_habits)
-
-def test_fetch_habits_by_periodicity_weekly():
-    """
-    Test that fetch_habits_by_periodicity correctly filters 'weekly' habits.
-    """
-    weekly_habits = fetch_habits_by_periodicity("weekly")
-    assert isinstance(weekly_habits, list)
-    if weekly_habits:
-        assert all(isinstance(h, str) for h in weekly_habits)
-
-def test_fetch_all_streaks():
-    """
-    Test that fetch_all_streaks returns a list of tuples (habit_name, streak_count).
-    """
-    streaks = fetch_all_streaks()
-    assert isinstance(streaks, list)
-    if streaks:
-        assert all(isinstance(entry, tuple) and len(entry) == 2 for entry in streaks)
-        assert all(isinstance(entry[0], str) and isinstance(entry[1], int) for entry in streaks)
-
-@pytest.mark.parametrize("habit_name", ["Drink Water", "Exercise", "Read Book"])  # Replace with real test data
-def test_fetch_streak_for_habit(habit_name):
-    """
-    Test that fetch_streak_for_habit returns an integer streak value or None for a given habit name.
-    """
-    streak = fetch_streak_for_habit(habit_name)
-    assert streak is None or isinstance(streak, int)
-```
-
-### Test Coverage
-
-- ✅ test_fetch_all_habits.
-- ✅ test_fetch_habits_by_periodicity_daily.
-- ✅ test_fetch_habits_by_periodicity_weekly.
-- ✅ test_fetch_all_streaks.
-- ✅ test_fetch_streak_for_habit[Drink Water]
-- ✅ test_fetch_streak_for_habit[Exercise]
-- ✅ test_fetch_streak_for_habit[Read Book]
----
-
-## Project Structure
-
-```bash
 habit-tracker/
 ├── analyze.py
 ├── .gitignore
@@ -236,29 +159,18 @@ habit-tracker/
 ├── main.py
 ├── test_data_insertion.py
 ├── test_concept.py
+├── test_analyze.py
 ├── README.md
 └── requirements.txt
-```
 
----
 
-## Dependencies
-
-The following Python packages are used in this project:
-
-```bash
 pytest
 Questionary
 sqlite3 (standard library)
 os (standard library)
 datetime (standard library)
-```
 
-Install all dependencies with:
 
-```bash
 pip install -r requirements.txt
-```
 
----
 
